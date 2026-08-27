@@ -55,23 +55,26 @@ export function JobPreviewCard({
 
       <p className={styles.rationale}>{match.rationale}</p>
 
-      <div className={styles.feedbackRow}>
-        <button
-          type="button"
-          className={`${styles.feedbackButton} ${feedback === 'saved' ? styles.feedbackButtonSaved : ''}`}
-          disabled={pending}
-          onClick={(e) => handleSetFeedback(e, 'saved')}
-        >
-          {feedback === 'saved' ? 'Saved ✓' : 'Save'}
-        </button>
-        <button
-          type="button"
-          className={`${styles.feedbackButton} ${feedback === 'dismissed' ? styles.feedbackButtonDismissed : ''}`}
-          disabled={pending}
-          onClick={(e) => handleSetFeedback(e, 'dismissed')}
-        >
-          {feedback === 'dismissed' ? 'Dismissed ✓' : 'Dismiss'}
-        </button>
+      <div className={styles.footer}>
+        <div className={styles.feedbackRow}>
+          <button
+            type="button"
+            className={`${styles.feedbackButton} ${feedback === 'saved' ? styles.feedbackButtonSaved : ''}`}
+            disabled={pending}
+            onClick={(e) => handleSetFeedback(e, 'saved')}
+          >
+            {feedback === 'saved' ? 'Saved ✓' : 'Save'}
+          </button>
+          <button
+            type="button"
+            className={`${styles.feedbackButton} ${feedback === 'dismissed' ? styles.feedbackButtonDismissed : ''}`}
+            disabled={pending}
+            onClick={(e) => handleSetFeedback(e, 'dismissed')}
+          >
+            {feedback === 'dismissed' ? 'Dismissed ✓' : 'Dismiss'}
+          </button>
+        </div>
+        <span className={styles.openHint}>View details →</span>
       </div>
     </Link>
   )

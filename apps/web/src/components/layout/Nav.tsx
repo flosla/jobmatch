@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { LeafIcon } from '../icons/LeafIcon'
 import styles from './Nav.module.css'
 
 export function Nav() {
@@ -6,6 +7,7 @@ export function Nav() {
     <nav className={styles.nav}>
       <div className={styles.inner}>
         <Link to="/matches" className={styles.brand}>
+          <LeafIcon />
           JobMatch
         </Link>
         <div className={styles.links}>
