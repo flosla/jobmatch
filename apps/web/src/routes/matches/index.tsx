@@ -6,6 +6,7 @@ import { JobPreviewCard } from '../../components/matches/JobPreviewCard'
 import { MatchFilterBar } from '../../components/matches/MatchFilterBar'
 import { TelegramSummaryButton } from '../../components/matches/TelegramSummaryButton'
 import { Skeleton } from '../../components/shared/Skeleton'
+import { todayIsoDate } from '../../lib/date'
 import {
   applyFilters,
   computeSalaryBreakpoints,
@@ -22,8 +23,10 @@ export const Route = createFileRoute('/matches/')({
 })
 
 function MatchesPage() {
-  const { date, matches: loadedMatches } = Route.useLoaderData()
+  const { matches: loadedMatches } = Route.useLoaderData()
   const [matches, setMatches] = useState(loadedMatches)
+  // Always today's real date, independent of the (possibly stale) seed date the matches were generated on.
+  const date = useMemo(() => todayIsoDate(), [])
   const [filters, setFilters] = useState<MatchFilterState>(createEmptyFilterState)
 
   function handleFeedbackChange(jobId: string, feedback: MatchFeedbackStatus) {

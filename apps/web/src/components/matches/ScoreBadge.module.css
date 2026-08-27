@@ -15,8 +15,8 @@
 }
 
 .solid {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
+  background: var(--color-info-soft);
+  color: var(--color-info);
 }
 
 .partial {

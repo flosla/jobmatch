@@ -40,7 +40,7 @@
 }
 
 .togglePill:hover {
-  border-color: #cdd3de;
+  border-color: var(--color-text-faint);
 }
 
 .togglePill:disabled {

@@ -4,42 +4,47 @@
 }
 
 .inner {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 0 1.5rem;
-  height: 60px;
+  height: 64px;
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
   color: var(--color-text);
   text-decoration: none;
 }
 
 .links {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .link {
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
   color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 0.925rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .link:hover {
-  background: var(--color-bg);
+  background: var(--color-surface-alt);
   color: var(--color-text);
 }
 
 .linkActive {
-  color: var(--color-accent);
+  color: var(--color-accent-hover);
   background: var(--color-accent-soft);
 }

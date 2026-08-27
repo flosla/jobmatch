@@ -14,7 +14,8 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 1.75rem 2rem;
+  padding: 2rem 2.25rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .header {
@@ -26,7 +27,9 @@
 }
 
 .title {
-  font-size: 1.4rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.55rem;
   margin: 0 0 0.25rem;
 }
 
@@ -67,8 +70,8 @@
   background: var(--color-accent);
   color: white;
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  padding: 0.65rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
@@ -85,14 +88,14 @@
 }
 
 .feedbackButton {
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   color: var(--color-text-muted);
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  padding: 0.4rem 0.7rem;
+  padding: 0.4rem 0.85rem;
 }
 
 .feedbackButton:disabled {
@@ -101,22 +104,23 @@
 }
 
 .feedbackButtonSaved {
-  background: var(--color-success-soft);
+  background: var(--color-success);
   border-color: var(--color-success);
-  color: var(--color-success);
+  color: white;
 }
 
 .feedbackButtonDismissed {
-  background: var(--color-surface);
+  background: var(--color-danger-soft);
   border-color: var(--color-danger);
   color: var(--color-danger);
 }
 
 .rationaleBox {
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   background: var(--color-accent-soft);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.1rem 1.25rem;
 }
 
 .rationaleHeader {
@@ -138,15 +142,15 @@
   background: none;
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
-  border-radius: var(--radius-sm);
-  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
   font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .regenerateButton:hover {
-  background: white;
+  background: var(--color-surface);
 }
 
 .regenerateButton:disabled {
