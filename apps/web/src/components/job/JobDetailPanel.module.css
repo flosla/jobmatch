@@ -1,0 +1,149 @@
+.back {
+  display: inline-block;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+.back:hover {
+  color: var(--color-text);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.4rem;
+  margin: 0 0 0.25rem;
+}
+
+.company {
+  color: var(--color-text-muted);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+}
+
+.tag {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.applyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.applyButton:hover {
+  background: var(--color-accent-hover);
+}
+
+.rationaleBox {
+  margin-top: 1.5rem;
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+}
+
+.rationaleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rationaleHeader h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.regenerateButton {
+  background: none;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.regenerateButton:hover {
+  background: white;
+}
+
+.regenerateButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.rationaleText {
+  margin: 0.6rem 0 0;
+  font-size: 0.925rem;
+  line-height: 1.5;
+}
+
+.mockNote {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.section {
+  margin-top: 1.75rem;
+}
+
+.section h3 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.section p {
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}

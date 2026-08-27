@@ -1,0 +1,55 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.entry {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.entry:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.entryTitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.entryDates {
+  color: var(--color-text-faint);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.entryCompany {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin: 0.1rem 0 0.5rem;
+}
+
+.highlights {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

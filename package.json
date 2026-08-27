@@ -1,0 +1,25 @@
+{
+  "name": "jobmatch",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "predev": "npm run build -w packages/shared",
+    "dev": "concurrently -n api,web -c green,blue \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
+    "build": "npm run build -w packages/shared && npm run build -w apps/api && npm run build -w apps/web",
+    "typecheck": "tsc -b && npm run typecheck -w apps/web",
+    "lint": "oxlint .",
+    "pipelines:seed": "python3 pipelines/generate_demo_data.py",
+    "pipelines:test": "python3 -m unittest discover -s pipelines/tests -t ."
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "concurrently": "^10.0.5",
+    "oxlint": "^1.80.0",
+    "typescript": "~7.0.2"
+  }
+}

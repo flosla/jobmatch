@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.strong {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.solid {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.partial {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}

@@ -1,0 +1,4 @@
+# No third-party dependencies are required today -- the demo pipeline
+# (CV parsing, scoring, rationale templating) is pure Python 3 stdlib.
+# Kept as a placeholder so the convention is visible; a real ingestion/
+# embedding pipeline would add packages here (e.g. requests, azure-ai-inference).

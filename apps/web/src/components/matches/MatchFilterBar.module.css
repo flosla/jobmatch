@@ -1,0 +1,20 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.clearAll {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.45rem 0.3rem;
+}
+
+.clearAll:hover {
+  color: var(--color-danger);
+}

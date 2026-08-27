@@ -1,0 +1,25 @@
+{
+  "name": "@jobmatch/api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "build": "tsc -b",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "typecheck": "tsc -b",
+    "test": "tsx --test src/app.test.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@jobmatch/shared": "*",
+    "fastify": "^5.12.1",
+    "fastify-type-provider-zod": "^7.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.3.0",
+    "tsx": "^4.23.12",
+    "typescript": "~7.0.2"
+  }
+}
