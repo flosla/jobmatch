@@ -1,4 +1,4 @@
-import type { MatchWithJob, SeniorityLevel, WorkplaceType } from '@jobmatch/shared'
+import type { MatchFeedbackStatus, MatchWithJob, SeniorityLevel, WorkplaceType } from '@jobmatch/shared'
 
 /**
  * Pure, dependency-free client-side filtering for the matches list.
@@ -21,6 +21,10 @@ export interface MatchFilterState {
   seniority: Set<SeniorityLevel>
   workplaceType: Set<WorkplaceType>
   matchTier: Set<MatchTier>
+  /** When true, only 'saved' matches are shown -- a genuine narrowing filter. */
+  savedOnly: boolean
+  /** When false (default), 'dismissed' matches are hidden -- a reveal toggle, not a narrowing filter. */
+  showDismissed: boolean
 }
 
 export function createEmptyFilterState(): MatchFilterState {
@@ -29,6 +33,8 @@ export function createEmptyFilterState(): MatchFilterState {
     seniority: new Set(),
     workplaceType: new Set(),
     matchTier: new Set(),
+    savedOnly: false,
+    showDismissed: false,
   }
 }
 
@@ -37,14 +43,23 @@ export function isFilterActive(filters: MatchFilterState): boolean {
     filters.salaryQuartile.size > 0 ||
     filters.seniority.size > 0 ||
     filters.workplaceType.size > 0 ||
-    filters.matchTier.size > 0
+    filters.matchTier.size > 0 ||
+    filters.savedOnly
   )
 }
 
 export function activeFilterCount(filters: MatchFilterState): number {
   return (
-    filters.salaryQuartile.size + filters.seniority.size + filters.workplaceType.size + filters.matchTier.size
+    filters.salaryQuartile.size +
+    filters.seniority.size +
+    filters.workplaceType.size +
+    filters.matchTier.size +
+    (filters.savedOnly ? 1 : 0)
   )
+}
+
+export function countByFeedback(matches: MatchWithJob[], status: MatchFeedbackStatus): number {
+  return matches.filter((m) => m.feedback === status).length
 }
 
 // --- Match tier (score) --------------------------------------------------
@@ -232,6 +247,8 @@ export function describeActiveFilters(filters: MatchFilterState, matches: MatchW
     .map((opt) => opt.label)
   if (matchTierLabels.length > 0) parts.push(`Match: ${matchTierLabels.join(', ')}`)
 
+  if (filters.savedOnly) parts.push('Saved only')
+
   return parts.length > 0 ? parts.join(' · ') : null
 }
 
@@ -242,9 +259,10 @@ export function applyFilters(
   filters: MatchFilterState,
   salaryBreakpoints: SalaryBreakpoints | null,
 ): MatchWithJob[] {
-  if (!isFilterActive(filters)) return matches
-
   return matches.filter((match) => {
+    if (!filters.showDismissed && match.feedback === 'dismissed') return false
+    if (filters.savedOnly && match.feedback !== 'saved') return false
+
     if (filters.seniority.size > 0 && !filters.seniority.has(match.job.seniority)) return false
     if (filters.workplaceType.size > 0 && !filters.workplaceType.has(match.job.workplaceType)) return false
 

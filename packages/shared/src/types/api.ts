@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { matchWithJobSchema } from './match.js'
+import { matchFeedbackStatusSchema, matchWithJobSchema } from './match.js'
 import { profileSchema } from './profile.js'
 
 export const getMatchesResponseSchema = z.object({
@@ -23,6 +23,17 @@ export const regenerateRationaleResponseSchema = z.object({
   generatedBy: z.literal('mock-azure-ai-foundry'),
 })
 export type RegenerateRationaleResponse = z.infer<typeof regenerateRationaleResponseSchema>
+
+export const setMatchFeedbackRequestSchema = z.object({
+  status: matchFeedbackStatusSchema,
+})
+export type SetMatchFeedbackRequest = z.infer<typeof setMatchFeedbackRequestSchema>
+
+export const setMatchFeedbackResponseSchema = z.object({
+  jobId: z.string(),
+  feedback: matchFeedbackStatusSchema,
+})
+export type SetMatchFeedbackResponse = z.infer<typeof setMatchFeedbackResponseSchema>
 
 export const errorResponseSchema = z.object({
   error: z.string(),

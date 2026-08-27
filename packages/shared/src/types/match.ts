@@ -9,6 +9,9 @@ export const scoreBreakdownSchema = z.object({
 })
 export type ScoreBreakdown = z.infer<typeof scoreBreakdownSchema>
 
+export const matchFeedbackStatusSchema = z.enum(['none', 'saved', 'dismissed'])
+export type MatchFeedbackStatus = z.infer<typeof matchFeedbackStatusSchema>
+
 export const matchSchema = z.object({
   jobId: z.string(),
   profileId: z.string(),
@@ -16,6 +19,7 @@ export const matchSchema = z.object({
   scoreBreakdown: scoreBreakdownSchema,
   rank: z.number().int().min(1),
   rationale: z.string(),
+  feedback: matchFeedbackStatusSchema.default('none'),
 })
 export type Match = z.infer<typeof matchSchema>
 

@@ -6,6 +6,7 @@ import {
   profileSchema,
   type GetMatchesResponse,
   type JobPosting,
+  type MatchFeedbackStatus,
   type MatchWithJob,
   type Profile,
 } from '@jobmatch/shared'
@@ -70,6 +71,19 @@ class SeedStore {
 
   getMatch(jobId: string): MatchWithJob | undefined {
     return this.matchesByJobId.get(jobId)
+  }
+
+  setMatchFeedback(jobId: string, status: MatchFeedbackStatus): MatchWithJob | undefined {
+    const existing = this.matchesByJobId.get(jobId)
+    if (!existing) return undefined
+
+    const updated: MatchWithJob = { ...existing, feedback: status }
+    this.matchesByJobId.set(jobId, updated)
+
+    const idx = this.matchesResponse.matches.findIndex((m) => m.jobId === jobId)
+    if (idx !== -1) this.matchesResponse.matches[idx] = updated
+
+    return updated
   }
 
   getJob(id: string): JobPosting | undefined {

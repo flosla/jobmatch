@@ -1,9 +1,34 @@
 import { Link } from '@tanstack/react-router'
-import type { MatchWithJob } from '@jobmatch/shared'
+import { useState } from 'react'
+import type { MatchFeedbackStatus, MatchWithJob } from '@jobmatch/shared'
+import { apiClient } from '../../lib/apiClient'
 import { ScoreBadge } from './ScoreBadge'
 import styles from './JobPreviewCard.module.css'
 
-export function JobPreviewCard({ match }: { match: MatchWithJob }) {
+export function JobPreviewCard({
+  match,
+  onFeedbackChange,
+}: {
+  match: MatchWithJob
+  onFeedbackChange?: (jobId: string, feedback: MatchFeedbackStatus) => void
+}) {
+  const [feedback, setFeedback] = useState(match.feedback)
+  const [pending, setPending] = useState(false)
+
+  async function handleSetFeedback(e: React.MouseEvent, status: MatchFeedbackStatus) {
+    e.preventDefault()
+    e.stopPropagation()
+    setPending(true)
+    try {
+      const next = feedback === status ? 'none' : status
+      const result = await apiClient.setMatchFeedback(match.jobId, next)
+      setFeedback(result.feedback)
+      onFeedbackChange?.(match.jobId, result.feedback)
+    } finally {
+      setPending(false)
+    }
+  }
+
   return (
     <Link to="/matches/$jobId" params={{ jobId: match.jobId }} className={styles.card}>
       <div className={styles.top}>
@@ -29,6 +54,25 @@ export function JobPreviewCard({ match }: { match: MatchWithJob }) {
       </div>
 
       <p className={styles.rationale}>{match.rationale}</p>
+
+      <div className={styles.feedbackRow}>
+        <button
+          type="button"
+          className={`${styles.feedbackButton} ${feedback === 'saved' ? styles.feedbackButtonSaved : ''}`}
+          disabled={pending}
+          onClick={(e) => handleSetFeedback(e, 'saved')}
+        >
+          {feedback === 'saved' ? 'Saved ✓' : 'Save'}
+        </button>
+        <button
+          type="button"
+          className={`${styles.feedbackButton} ${feedback === 'dismissed' ? styles.feedbackButtonDismissed : ''}`}
+          disabled={pending}
+          onClick={(e) => handleSetFeedback(e, 'dismissed')}
+        >
+          {feedback === 'dismissed' ? 'Dismissed ✓' : 'Dismiss'}
+        </button>
+      </div>
     </Link>
   )
 }

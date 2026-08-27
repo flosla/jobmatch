@@ -1,9 +1,11 @@
 .dropdown {
   position: relative;
+  width: 100%;
 }
 
 .trigger {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   align-items: center;
   gap: 0.4rem;
   background: var(--color-surface);
@@ -14,6 +16,8 @@
   font-weight: 600;
   color: var(--color-text);
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .trigger:hover {
@@ -41,6 +45,7 @@
 }
 
 .chevron {
+  margin-left: auto;
   font-size: 0.7rem;
   color: var(--color-text-faint);
 }

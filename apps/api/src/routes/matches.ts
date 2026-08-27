@@ -1,7 +1,13 @@
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
-import { errorResponseSchema, getMatchesResponseSchema, matchWithJobSchema } from '@jobmatch/shared'
+import {
+  errorResponseSchema,
+  getMatchesResponseSchema,
+  matchWithJobSchema,
+  setMatchFeedbackRequestSchema,
+  setMatchFeedbackResponseSchema,
+} from '@jobmatch/shared'
 import { seedStore } from '../data/seedStore.js'
 
 export function registerMatchRoutes(app: FastifyInstance) {
@@ -27,6 +33,24 @@ export function registerMatchRoutes(app: FastifyInstance) {
         return reply.code(404).send({ error: `No match found for jobId "${request.params.jobId}"` })
       }
       return match
+    },
+  )
+
+  typedApp.put(
+    '/api/matches/:jobId/feedback',
+    {
+      schema: {
+        params: z.object({ jobId: z.string() }),
+        body: setMatchFeedbackRequestSchema,
+        response: { 200: setMatchFeedbackResponseSchema, 404: errorResponseSchema },
+      },
+    },
+    async (request, reply) => {
+      const updated = seedStore.setMatchFeedback(request.params.jobId, request.body.status)
+      if (!updated) {
+        return reply.code(404).send({ error: `No match found for jobId "${request.params.jobId}"` })
+      }
+      return { jobId: updated.jobId, feedback: updated.feedback }
     },
   )
 }
