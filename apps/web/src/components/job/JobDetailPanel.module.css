@@ -53,6 +53,13 @@
   text-transform: capitalize;
 }
 
+.headerActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
 .applyButton {
   display: inline-flex;
   align-items: center;
@@ -70,6 +77,39 @@
 
 .applyButton:hover {
   background: var(--color-accent-hover);
+}
+
+.feedbackRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.feedbackButton {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0.7rem;
+}
+
+.feedbackButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.feedbackButtonSaved {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.feedbackButtonDismissed {
+  background: var(--color-surface);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 .rationaleBox {

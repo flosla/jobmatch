@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm view *)"
+      "Bash(npm view *)",
+      "Bash(npm run *)",
+      "Bash(node verify-layout.mjs)",
+      "Bash(node verify-clearall.mjs)"
     ]
   }
 }

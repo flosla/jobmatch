@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import type { MatchWithJob } from '@jobmatch/shared'
+import type { MatchFeedbackStatus, MatchWithJob } from '@jobmatch/shared'
 import { apiClient } from '../../lib/apiClient'
 import { ScoreBadge } from '../matches/ScoreBadge'
 import styles from './JobDetailPanel.module.css'
@@ -8,6 +8,8 @@ import styles from './JobDetailPanel.module.css'
 export function JobDetailPanel({ match }: { match: MatchWithJob }) {
   const [rationale, setRationale] = useState(match.rationale)
   const [regenerating, setRegenerating] = useState(false)
+  const [feedback, setFeedback] = useState(match.feedback)
+  const [savingFeedback, setSavingFeedback] = useState(false)
 
   async function handleRegenerate() {
     setRegenerating(true)
@@ -16,6 +18,17 @@ export function JobDetailPanel({ match }: { match: MatchWithJob }) {
       setRationale(result.rationale)
     } finally {
       setRegenerating(false)
+    }
+  }
+
+  async function handleSetFeedback(status: MatchFeedbackStatus) {
+    setSavingFeedback(true)
+    try {
+      const next = feedback === status ? 'none' : status
+      const result = await apiClient.setMatchFeedback(match.jobId, next)
+      setFeedback(result.feedback)
+    } finally {
+      setSavingFeedback(false)
     }
   }
 
@@ -47,9 +60,29 @@ export function JobDetailPanel({ match }: { match: MatchWithJob }) {
               <ScoreBadge score={match.score} />
             </div>
           </div>
-          <a href={job.applyUrl} target="_blank" rel="noopener noreferrer" className={styles.applyButton}>
-            Apply on company site ↗
-          </a>
+          <div className={styles.headerActions}>
+            <a href={job.applyUrl} target="_blank" rel="noopener noreferrer" className={styles.applyButton}>
+              Apply on company site ↗
+            </a>
+            <div className={styles.feedbackRow}>
+              <button
+                type="button"
+                className={`${styles.feedbackButton} ${feedback === 'saved' ? styles.feedbackButtonSaved : ''}`}
+                disabled={savingFeedback}
+                onClick={() => handleSetFeedback('saved')}
+              >
+                {feedback === 'saved' ? 'Saved ✓' : 'Save'}
+              </button>
+              <button
+                type="button"
+                className={`${styles.feedbackButton} ${feedback === 'dismissed' ? styles.feedbackButtonDismissed : ''}`}
+                disabled={savingFeedback}
+                onClick={() => handleSetFeedback('dismissed')}
+              >
+                {feedback === 'dismissed' ? 'Dismissed ✓' : 'Dismiss'}
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className={styles.rationaleBox}>

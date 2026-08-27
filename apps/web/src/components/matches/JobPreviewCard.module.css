@@ -67,3 +67,37 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.feedbackRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.feedbackButton {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.35rem 0.65rem;
+}
+
+.feedbackButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.feedbackButtonSaved {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.feedbackButtonDismissed {
+  background: var(--color-surface);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}

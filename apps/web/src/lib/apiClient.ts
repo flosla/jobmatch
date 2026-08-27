@@ -6,15 +6,19 @@ import {
   matchWithJobSchema,
   profileSchema,
   regenerateRationaleResponseSchema,
+  setMatchFeedbackRequestSchema,
+  setMatchFeedbackResponseSchema,
   telegramSummaryRequestSchema,
   telegramSummaryResponseSchema,
   updateProfileRequestSchema,
   type CvParsePreviewResponse,
   type GetMatchesResponse,
   type JobPosting,
+  type MatchFeedbackStatus,
   type MatchWithJob,
   type Profile,
   type RegenerateRationaleResponse,
+  type SetMatchFeedbackResponse,
   type TelegramSummaryRequest,
   type TelegramSummaryResponse,
   type UpdateProfileRequest,
@@ -51,6 +55,12 @@ export const apiClient = {
   getTodayMatches: (): Promise<GetMatchesResponse> => request('/api/matches', getMatchesResponseSchema),
 
   getMatch: (jobId: string): Promise<MatchWithJob> => request(`/api/matches/${jobId}`, matchWithJobSchema),
+
+  setMatchFeedback: (jobId: string, status: MatchFeedbackStatus): Promise<SetMatchFeedbackResponse> =>
+    request(`/api/matches/${jobId}/feedback`, setMatchFeedbackResponseSchema, {
+      method: 'PUT',
+      body: JSON.stringify(setMatchFeedbackRequestSchema.parse({ status })),
+    }),
 
   getJob: (jobId: string): Promise<JobPosting> => request(`/api/jobs/${jobId}`, jobPostingSchema),
 
